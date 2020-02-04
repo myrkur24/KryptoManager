@@ -1,0 +1,2 @@
+# KryptoManager
+Testing modular Repository.
