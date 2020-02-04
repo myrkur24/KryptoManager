@@ -1,0 +1,38 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3"    
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": ":memory"
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3"
+  },
+  "developmentBACK": {
+    "username": "root",
+    "password": null,
+    "database": "db_krytomanager_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "testBACK": {
+    "username": "root",
+    "password": null,
+    "database": "db_krytomanager_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "productionBACK": {
+    "username": "root",
+    "password": null,
+    "database": "db_krytomanager_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
