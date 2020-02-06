@@ -11,33 +11,43 @@ const tokenService = require('../services/tokenService');
 });*/
 
 // create user 
-router.post('/', (response) => {
-  const { userName, password, personId } = req.body
-  models.User.create({ userName, password, personId })
-    .then((user) => res.send(user))
-    .catch((err) => {
-      console.log('***There was an error creating de User', JSON.stringify(err))
-      return res.status(400).send(err)
-    })
+router.post('/', (req, res, next) => {
+    const { userName, password, personId } = req.body
+    models.User.create({ userName, password, personId })
+        .then((user) => res.send(user))
+        .catch((err) => {
+            console.log('***There was an error creating de User', JSON.stringify(err))
+            return res.status(400).send(err)
+        })
 });
 
 // validate user 
 router.post('/login', (req, res, next) => {
-  const { userName, password } = req.body;
-  models.User.findOne({ where: { userName, password } })
-    .then((user) => {
-      let { userName, personId } = user;
-      new tokenService().generateToken({ userName, personId }, response => {
-        res.send({
-          status: 'succesful',
-          token: response.data
-        });
-      });
-    })
-    .catch((err) => {
-      console.log('***There was an error creating de User', JSON.stringify(err))
-      return res.status(400).send(err)
-    })
+    const { userName, password } = req.body;
+    console.log({ userName, password });
+    models.User.findOne({ where: { userName, password } })
+        .then((user) => {
+            if (user) {
+                let { userName, personId } = user;
+                new tokenService().generateToken({ userName, personId }, response => {
+                    res.send({
+                        status: 'succesful',
+                        token: response.data,
+                        personId: personId,
+                        userName: userName
+                    });
+                });
+            } else {
+                res.json({
+                    status: 'fail',
+                    message: 'not found'
+                });
+            }
+        })
+        .catch((err) => {
+            console.log('***There was an error creating de User', err)
+            return res.status(400).send(err)
+        })
 });
 
 module.exports = router;

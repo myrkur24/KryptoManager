@@ -12,11 +12,11 @@ const config = {
 class bncservice {
     getCurrency(show, coin, del) {
         axios({
-            "method": "GET",
-            "url": `${config.url}/ticker`,
-            "headers": config.headers,
-            "params": { show: show, coin: coin }
-        })
+                "method": "GET",
+                "url": `${config.url}/ticker`,
+                "headers": config.headers,
+                "params": { show: show, coin: coin }
+            })
             .then(del)
             .catch((error) => {
                 console.log(error)
@@ -25,10 +25,10 @@ class bncservice {
 
     getCrytos(del) {
         axios({
-            "method": "GET",
-            "url": `${config.url}/digital-currency-symbols`,
-            "headers": config.headers
-        })
+                "method": "GET",
+                "url": `${config.url}/digital-currency-symbols`,
+                "headers": config.headers
+            })
             .then(del)
             .catch((error) => {
                 console.log('Error in External service', error)
